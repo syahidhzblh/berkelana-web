@@ -3,5 +3,7 @@ version: "3"
 services:
   berkelana-web:
     build: .
+    image: berkelana:v1
+    container_name: berkelana-web
     ports:
       - 8080:80

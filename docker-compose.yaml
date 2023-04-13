@@ -1,5 +1,6 @@
+#set version docker compose
 version: "3"
-
+#create & run container from image existing
 services:
   berkelana-web:
     build: .

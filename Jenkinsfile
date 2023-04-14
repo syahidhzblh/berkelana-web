@@ -12,9 +12,9 @@ pipeline{
         }
         stage('push'){
             steps{
-                withCredentials([file(credentialsId:'gcr-admin-key' , variable:'GCLOUD_CREDS')]){
+                withCredentials([file(credentialsId: 'gcr-admin-key', variable: 'GCLOUD_CREDS')]){
                 sh '''
-                    gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
+                    gcloud auth activate-service-account --key-file=${GCLOUD_CREDS}
                     docker push gcr.io/horizontal-ally-383421/berkelana:v1
                     '''
                 }

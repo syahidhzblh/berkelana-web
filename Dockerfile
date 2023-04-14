@@ -1,3 +1,4 @@
+#build docker imgae
 FROM nginx:alpine
 COPY . /usr/share/nginx/html
 

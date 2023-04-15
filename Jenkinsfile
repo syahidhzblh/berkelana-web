@@ -1,23 +1,23 @@
 pipeline{
     agent any
-    environment{
-        CLOUDSDK_CORE_PROJECT='horizontal-ally-383421'
-        GCLOUD_CREDS=credentials('gcr-admin-key')
-    }
     stages {
         stage('build') {
             steps{
+                //git
+                git 'https://github.com/syahidhzblh/berkelana.github.io.git'
+                //build docker image
                 sh 'docker build -t gcr.io/horizontal-ally-383421/berkelana:v1 .'
             }
         }
         stage('push'){
+            environment{
+                GOOGLE_APPLICATION_CREDENTIALS = credentials('gcr-admin-key')
+            }
             steps{
-                withCredentials([file(credentialsId: 'gcr-admin-key', variable: 'GCLOUD_CREDS')]){
-                sh '''
-                    gcloud auth activate-service-account --key-file=${GCLOUD_CREDS}
-                    docker push gcr.io/horizontal-ally-383421/berkelana:v1
-                    '''
-                }
+                // Authenticate Docker to GCR
+                sh 'gcloud auth configure-docker --quiet'
+                // push image to GCR
+                sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v1'   
             }
         }
     }

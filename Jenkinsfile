@@ -11,11 +11,11 @@ pipeline{
         }
         stage('push'){
             environment{
-                GOOGLE_CREDENTIALS = credentials('horizontal-ally-383421')
+                GOOGLE_CREDENTIALS = credentials('gcr-admin-key')
             }
             steps{
                 // Authenticate Docker to GCR
-                sh 'gcloud auth activate-service-account --key-file="$GOOGLE_CREDENTIALS"'
+                sh 'gcloud auth activate-service-account jenkins-gcr-admin@horizontal-ally-383421.iam.gserviceaccount.com --key-file="$GOOGLE_CREDENTIALS"'
                 sh 'gcloud auth configure-docker --quiet'
                 // push image to GCR
                 sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v1'   

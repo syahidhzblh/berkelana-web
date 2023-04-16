@@ -14,10 +14,11 @@ pipeline{
         stage('push'){
             steps{
                 // Authenticate Docker to GCR
+                    //withCredentails([string(credentialID:'gcr-admin-key', value:'gcr-key')])
 
                     //sh 'gcloud auth activate-service-account --key-file=./key.json'
                     //sh 'gcloud auth configure-docker --quiet'
-                    
+
                     // Push Image to GCR
                     sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v1'   
             }

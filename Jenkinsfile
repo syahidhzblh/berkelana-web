@@ -13,16 +13,13 @@ pipeline{
         }
         stage('push'){
             steps{
-                withCredentials([[
-                    $class: 'GoogleRobotPrivateKeyBinding',
-                    credentialsId: 'gcr-admin-key',
-                    variable: 'GOOGLE_CREDENTIALS'
-                ]])
+                 withCredentials([file(credentialsId: 'gcr-admin-key', variable: 'GOOGLE_CREDENTIALS')]){
                     // Authenticate Docker to GCR
                     sh 'gcloud auth activate-service-account --key-file=$GOOGLE_CREDENTIALS'
                     sh 'gcloud auth configure-docker --quiet'
                     // Push Image to GCR
                     sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v1'   
+                 }    
             }
         }
     }

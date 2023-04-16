@@ -3,12 +3,12 @@ pipeline{
     stages {
         stage('build') {
             steps{
-                //git
+                // Connect to Git
                 git 'https://github.com/syahidhzblh/berkelana.github.io.git'
-                //build docker image
+                // Build Docker image from Dockerfile
                 sh 'docker build -t gcr.io/horizontal-ally-383421/berkelana:v1 .'
-                //removing image with tag <none>
-                sh 'docker image prune'
+                // Removing image with tag <none>
+                sh 'docker image prune -f'
             }
         }
         stage('push'){
@@ -20,7 +20,7 @@ pipeline{
                 // Authenticate Docker to GCR
                 sh 'gcloud auth activate-service-account $GOOGLE_EMAIL --key-file="$GOOGLE_CREDENTIALS"'
                 sh 'gcloud auth configure-docker --quiet'
-                // push image to GCR
+                // Push Image to GCR
                 sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v1'   
             }
         }

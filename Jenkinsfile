@@ -7,7 +7,7 @@ pipeline{
             CREDENTIALS_ID = 'gcr-admin-key'
     }
     stages {
-        stage('build') {
+        stage('Build') {
             steps{
                 // Connect to Git
                 git 'https://github.com/syahidhzblh/berkelana.github.io.git'
@@ -17,17 +17,17 @@ pipeline{
                 sh 'docker image prune -f'
             }
         }
-        stage('authenticate'){
+        stage('Authenticate'){
             steps{
                 withCredentials([file(credentialsId:'gcr-admin-key', variable:'gcloud_creds')]){
                     sh '''
-                     gcloud auth activate-service-account --key-file=$gcloud_creds
+                     gcloud auth activate-service-account --key-file=$CREDENTIALS_ID
                      gcloud auth configure-docker --quiet
                     '''
                 }   
             }
         }
-        stage('push'){
+        stage('Push'){
             steps{
                 sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v1'
             }

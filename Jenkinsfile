@@ -14,9 +14,9 @@ pipeline{
         stage('push'){
             steps{
                 // Authenticate Docker to GCR
-                withCredentials([file(credentialsId:'gcr-admin-key', variable:'gcloud-creds')]){
+                withCredentials([file(credentialsId:'gcr-admin-key', variable:'gcloud_creds')]){
 
-                    sh 'gcloud auth activate-service-account --key-file="$gcloud-creds"'
+                    sh 'gcloud auth activate-service-account --key-file=$gcloud_creds'
                     sh 'gcloud auth configure-docker --quiet'
 
                     // Push Image to GCR

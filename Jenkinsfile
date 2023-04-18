@@ -14,13 +14,9 @@ pipeline{
         stage('push'){
             steps{
                 // Authenticate Docker to GCR
-                withCredentials([[
-                    $class: 'GoogleOAuth2CredentialBinding',
-                    credentialsId: 'gcr-admin-key',
-                    scope: ['https://www.googleapis.com/auth/cloud-platform']
-                ]]){
+                withCredentials([file(credentialsId:'gcr-admin-key', variable:'gcloud-creds')]){
 
-                    //sh 'gcloud auth activate-service-account --key-file=./key.json'
+                    sh 'gcloud auth activate-service-account --key-file="gcloud-creds"'
                     sh 'gcloud auth configure-docker --quiet'
 
                     // Push Image to GCR

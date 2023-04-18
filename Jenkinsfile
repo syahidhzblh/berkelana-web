@@ -1,5 +1,11 @@
 pipeline{
     agent any
+    environment{
+        PROJECT_ID = 'horizontal-ally-383421'
+            CLUSTER_NAME = 'demo-gke'
+            LOCATION = 'us-central1'
+            CREDENTIALS_ID = 'gcr-admin-key'
+    }
     stages {
         stage('build') {
             steps{
@@ -11,17 +17,19 @@ pipeline{
                 sh 'docker image prune -f'
             }
         }
+        stage('authenticate'){
+            steps{
+                withCredentials([file(credentialsId:'gcr-admin-key', variable:'gcloud_creds')])
+                {   '''
+                    sh gcloud auth activate-service-account --key-file=$gcloud_creds
+                    sh gcloud auth configure-docker --quiet
+                    '''
+                }   
+            }
+        }
         stage('push'){
             steps{
-                // Authenticate Docker to GCR
-                withCredentials([file(credentialsId:'gcr-admin-key', variable:'gcloud_creds')]){
-
-                    sh 'gcloud auth activate-service-account --key-file=$gcloud_creds'
-                    sh 'gcloud auth configure-docker --quiet'
-
-                    // Push Image to GCR
-                    sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v1'
-                }   
+                sh 'gcr.io/horizontal-ally-383421/berkelana:v1'
             }
         }
     }

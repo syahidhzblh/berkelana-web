@@ -29,7 +29,7 @@ pipeline{
         }
         stage('push'){
             steps{
-                sh 'gcr.io/horizontal-ally-383421/berkelana:v1'
+                sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v1'
             }
         }
     }

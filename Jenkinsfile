@@ -5,6 +5,7 @@ pipeline{
             CLUSTER_NAME = 'demo-gke'
             LOCATION = 'us-central1'
             CREDENTIALS_ID = 'gcr-admin-key'
+            BUILD_ID = '${BUILD_ID}'
     }
     stages {
         stage('Build') {

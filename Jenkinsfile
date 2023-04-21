@@ -12,7 +12,7 @@ pipeline{
                 // Connect to Git
                 git 'https://github.com/syahidhzblh/berkelana.github.io.git'
                 // Build Docker image from Dockerfile
-                sh 'docker build -t gcr.io/horizontal-ally-383421/berkelana:$env.BUILD_ID .'
+                sh 'docker build -t gcr.io/horizontal-ally-383421/berkelana:${env.BUILD_ID} .'
                 // Removing image with tag <none>
                 sh 'docker image prune -f'
             }
@@ -29,7 +29,7 @@ pipeline{
         }
         stage('Push'){
             steps{
-                sh 'docker push gcr.io/horizontal-ally-383421/berkelana:$env.BUILD_ID'
+                sh 'docker push gcr.io/horizontal-ally-383421/berkelana:${env.BUILD_ID}'
             }
         }
     }

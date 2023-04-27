@@ -34,10 +34,8 @@ pipeline{
         }
     }
     post{
-        always{
-            script{
-                sh 'docker rmi $(docker image ls)'
-            }
+        success{
+            sh 'docker rmi $(docker image ls)'
         }
     }
 }

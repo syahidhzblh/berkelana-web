@@ -33,9 +33,9 @@ pipeline{
             }
         }
     }
-    //post{
-      //  success{
-         //   sh 'docker rmi $(docker image ls)'
-        //}
-    //}
+    post{
+        success{
+            sh 'docker rmi $(docker image ls)'
+        }
+    }
 }

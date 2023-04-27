@@ -32,8 +32,10 @@ pipeline{
                 sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v${BUILD_ID}'
             }
         }
-        post{
-            always{
+    }
+    post{
+        always{
+            script{
                 sh 'docker rmi $(docker image ls)'
             }
         }

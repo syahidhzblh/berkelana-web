@@ -1,12 +1,12 @@
 ---
 apiVersion: apps/v1
-kind: Deployement
+kind: Deployment
 metadata:
   name: berkelana-web
-  namespace: demo
+  namespace: demo-gke
 spec:
   selector:
-    matchlabels:
+    matchLabels:
       app: berkelana
   replicas: 2
   template:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: berkelana
-          image: gcr.io/horizontal-ally-383421/berkelana:v1
+          image: gcr.io/horizontal-ally-383421/berkelana:v53
           ports:
             - containerPort: 80
 ---
@@ -24,7 +24,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: berkelana-service
-  namespace: demo
+  namespace: demo-gke
 spec:
   type: LoadBalancer
   selector:

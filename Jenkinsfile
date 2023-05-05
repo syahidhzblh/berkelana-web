@@ -32,6 +32,11 @@ pipeline{
                 sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v${BUILD_ID}'
             }
         }
+        stage('Deploy'){
+            steps{
+                sh 'kubectl apply -f deployment.yaml'
+            }
+        }
     }
     post{
         success{

@@ -3,7 +3,7 @@ pipeline{
     environment{
         PROJECT_ID = 'horizontal-ally-383421'
             CLUSTER_NAME = 'demo-gke'
-            LOCATION = 'us-central1'
+            ZONE = 'us-central1'
             CREDENTIALS_ID = 'gcr-admin-key'
     }
     stages {
@@ -34,7 +34,12 @@ pipeline{
         }
         stage('Deploy'){
             steps{
-                sh 'kubectl apply -f deployment.yaml'
+                withCredentials([file(credentialsId:'gcr-deploy', variable:'gke_creds')]){
+                    git 'https://github.com/syahidhzblh/berkelana.github.io.git'
+                    sh '''
+                        gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE && kubectl apply -f deployment.yaml
+                    '''
+                }
             }
         }
     }

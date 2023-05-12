@@ -17,17 +17,6 @@ pipeline{
                 sh 'docker image prune -f'
             }
         }
-        stage('Authenticate'){
-            steps{
-                withCredentials([file(credentialsId:'gcr-deploy', variable:'gke_creds')]){
-                    sh '''
-                     gcloud auth login
-                     gcloud auth activate-service-account --key-file=$gke_creds
-                     gcloud auth configure-docker --quiet
-                    '''
-                }   
-            }
-        }
         stage('Push'){
             steps{
                 sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v${BUILD_ID}'

@@ -19,9 +19,9 @@ pipeline{
         }
         stage('Authenticate'){
             steps{
-                withCredentials([file(credentialsId:'gcr-admin-key', variable:'gcloud_creds')]){
+                withCredentials([file(credentialsId:'gcr-deploy', variable:'gke_creds')]){
                     sh '''
-                     gcloud auth activate-service-account --key-file=$gcloud_creds
+                     gcloud auth activate-service-account --key-file=$gke_creds
                      gcloud auth configure-docker --quiet
                     '''
                 }   

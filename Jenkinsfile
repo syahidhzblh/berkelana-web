@@ -4,7 +4,7 @@ pipeline{
         PROJECT_ID = 'horizontal-ally-383421'
             CLUSTER_NAME = 'demo-gke'
             ZONE = 'us-central1'
-            CREDENTIALS_ID = 'gcr-admin-key'
+            CREDENTIALS_ID = 'gcr-deploy'
     }
     stages {
         stage('Build') {

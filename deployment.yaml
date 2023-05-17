@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: berkelana
-          image: gcr.io/horizontal-ally-383421/berkelana:latest
+          image: gcr.io/horizontal-ally-383421/berkelana:v$(BUILD_ID)
           ports:
             - containerPort: 80
 ---

@@ -17,9 +17,12 @@ pipeline{
                 sh 'docker image prune -f'
             }
         }
-        stage('Push'){
+        stage('Push & Remove Cache Images'){
             steps{
-                sh 'docker push gcr.io/horizontal-ally-383421/berkelana:v${BUILD_ID}'
+                sh '''
+                docker push gcr.io/horizontal-ally-383421/berkelana:v${BUILD_ID}
+                docker rmi $(docker image ls)
+                '''
             }
         }
         stage('Deploy'){
@@ -33,11 +36,6 @@ pipeline{
                     '''
                 }
             }
-        }
-    }
-    post{
-        success{
-            sh 'docker rmi $(docker image ls)'
         }
     }
 }

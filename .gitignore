@@ -36,5 +36,7 @@ Temporary Items
 
 #nginx conf
 sites-enabled
+opensslcfg
+pipeline-test
 
 # End of https://www.toptal.com/developers/gitignore/api/macos

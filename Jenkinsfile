@@ -30,7 +30,6 @@ pipeline{
                     git 'https://github.com/syahidhzblh/berkelana.github.io.git'
                     sh '''
                         gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE
-                        kubectl delete services --all
                         kubectl apply -f deployment.yaml
                     '''
                 }

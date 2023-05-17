@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: berkelana-web
-  namepace: demo-gke
+  namespace: demo-gke
 spec:
   selector:
     matchLabels:

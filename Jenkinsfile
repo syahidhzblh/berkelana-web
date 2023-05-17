@@ -21,7 +21,6 @@ pipeline{
             steps{
                 sh '''
                 docker push gcr.io/horizontal-ally-383421/berkelana:v${BUILD_ID}
-                docker rmi $(docker image ls)
                 '''
             }
         }

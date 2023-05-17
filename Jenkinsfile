@@ -17,7 +17,7 @@ pipeline{
                 sh 'docker image prune -f'
             }
         }
-        stage('Push & Remove Cache Images'){
+        stage('Push'){
             steps{
                 sh '''
                 docker push gcr.io/horizontal-ally-383421/berkelana:v${BUILD_ID}
@@ -30,7 +30,6 @@ pipeline{
                     git 'https://github.com/syahidhzblh/berkelana.github.io.git'
                     sh '''
                         gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE
-                        kubectl create namespace demo-gke
                         kubectl apply -f deployment.yaml
                     '''
                 }

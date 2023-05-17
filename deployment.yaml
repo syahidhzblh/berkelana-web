@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: berkelana-web
-  namespace: demo-gke
+  namepace: demo-gke
 spec:
   selector:
     matchLabels:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: berkelana
-          image: gcr.io/horizontal-ally-383421/berkelana:v53
+          image: gcr.io/horizontal-ally-383421/berkelana:$BUILD_ID
           ports:
             - containerPort: 80
 ---
@@ -33,4 +33,3 @@ spec:
     - protocol: TCP
       port: 8081
       targetPort: 80
-      nodePort: 30748

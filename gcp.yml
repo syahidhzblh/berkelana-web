@@ -1,0 +1,30 @@
+---
+name: Build and Push to GCR
+on:
+  push:
+  branches: [master]
+jobs:
+  build-push-gcr:
+  name: Build and Push to GCR
+  runs-on: ubuntu-latest
+  env:
+    IMAGE_NAME: gcr.io/horizontal-ally-383421/berkelana
+    PROJECT_ID: horizontal-ally-383421
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.GCR_DEPLOYER }}
+        project_id: ${{ env.PROJECT_ID }}
+        export_default_credential: true
+
+    - name: Build Docker image
+      run: docker build -t $IMAGE_NAME:latest
+
+    - name: Auth Configuration Docker
+      run: gcloud auth configure-docker --quiet
+
+    - name: Push Image to GCR
+      run: docker push $IMAGE_NAME:latest

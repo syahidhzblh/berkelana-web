@@ -20,9 +20,6 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
           export_default_credential: true
 
-      - name: Auth GCP Service
-        uses: google-github-actions/auth
-
       - name: Build Docker image
         run: docker build -t $IMAGE_NAME:latest .
 

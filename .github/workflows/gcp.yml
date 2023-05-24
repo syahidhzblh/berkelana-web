@@ -20,8 +20,7 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
           export_default_credential: true
 
-      - name: Auth GCP Service Account
-        uses: google-github-actions/auth
+      - uses: google-github-actions/auth
         with:
           service_account_key: ${{ secrets.GCR_DEPLOYER }}
 

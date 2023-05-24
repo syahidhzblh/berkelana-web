@@ -2,7 +2,7 @@
 name: Build and Push to GCR
 on:
   push:
-    branches: ["master"]
+    branches: [master]
 jobs:
   build-push-gcr:
     name: Build and Push to GCR

@@ -20,10 +20,10 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
 
       - name: Build Docker image
-        run: docker build -t $IMAGE_NAME:latest .
+        run: docker build -t $IMAGE_NAME:v80 .
 
       - name: Auth Configuration Docker
         run: gcloud auth configure-docker --quiet
 
       - name: Push Image to GCR
-        run: docker push $IMAGE_NAME:latest
+        run: docker push $IMAGE_NAME:v80

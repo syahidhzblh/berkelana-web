@@ -20,7 +20,7 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
 
       - name: Build Docker image
-        run: docker build -t $IMAGE_NAME:v80 .
+        run: docker build -t $IMAGE_NAME:v81 .
 
       - name: Auth Configuration Docker
         run: gcloud auth configure-docker --quiet

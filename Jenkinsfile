@@ -20,7 +20,7 @@ pipeline{
         stage('Push'){
             steps{
                 sh '''
-                docker push gcr.io/horizontal-ally-383421/berkelana:latest
+                docker push syahid188/berkelana:v2
                 '''
             }
         }

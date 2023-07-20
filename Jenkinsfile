@@ -6,15 +6,15 @@ pipeline{
                 // Connect to Git
                 git 'https://github.com/syahidhzblh/berkelana.github.io.git'
                 // Build Docker image from Dockerfile
-                sh 'docker build -t 151231214213.dkr.ecr.ap-southeast-2.amazonaws.com/berkelana:latest .'
+                sh 'sudo docker build -t 151231214213.dkr.ecr.ap-southeast-2.amazonaws.com/berkelana:latest .'
                 // Removing image with tag <none>
-                sh 'docker image prune -f'
+                sh 'sudo docker image prune -f'
             }
         }
         stage('Push'){
             steps{
                 sh '''
-                docker push 151231214213.dkr.ecr.ap-southeast-2.amazonaws.com/berkelana:latest
+                sudo docker push 151231214213.dkr.ecr.ap-southeast-2.amazonaws.com/berkelana:latest
                 '''
             }
         }

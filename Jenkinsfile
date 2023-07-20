@@ -1,18 +1,12 @@
 pipeline{
     agent any
-    environment{
-        PROJECT_ID = 'horizontal-ally-383421'
-            CLUSTER_NAME = 'demo-gke'
-            ZONE = 'us-central1'
-            CREDENTIALS_ID = 'gcr-deploy'
-    }
     stages {
         stage('Build') {
             steps{
                 // Connect to Git
                 git 'https://github.com/syahidhzblh/berkelana.github.io.git'
                 // Build Docker image from Dockerfile
-                sh 'docker build -t gcr.io/horizontal-ally-383421/berkelana:latest .'
+                sh 'docker build -t 151231214213.dkr.ecr.ap-southeast-2.amazonaws.com/berkelana:latest .'
                 // Removing image with tag <none>
                 sh 'docker image prune -f'
             }
@@ -20,20 +14,10 @@ pipeline{
         stage('Push'){
             steps{
                 sh '''
-                docker push syahid188/berkelana:v2
+                docker push 151231214213.dkr.ecr.ap-southeast-2.amazonaws.com/berkelana:latest
                 '''
             }
         }
-        stage('Deploy'){
-            steps{
-                withCredentials([file(credentialsId:'gcr-deploy', variable:'gke_creds')]){
-                    git 'https://github.com/syahidhzblh/berkelana.github.io.git'
-                    sh '''
-                        gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE
-                        kubectl apply -f deployment.yaml
-                    '''
-                }
-            }
         }
     }
 }

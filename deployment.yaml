@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: berkelana-web
-  namespace: demo-gke
+  namespace: gke-test
 spec:
   selector:
     matchLabels:
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: berkelana
-          image: gcr.io/horizontal-ally-383421/berkelana:latest
+          image: 151231214213.dkr.ecr.ap-southeast-2.amazonaws.com/berkelana:latest
           ports:
             - containerPort: 80
 ---
@@ -24,7 +24,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: berkelana-service
-  namespace: demo-gke
+  namespace: gke-test
 spec:
   type: LoadBalancer
   selector:

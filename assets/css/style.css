@@ -431,6 +431,7 @@ h6,
 
   #hero .hero-img img {
     width: 70%;
+    height: auto;
   }
 }
 
@@ -447,12 +448,14 @@ h6,
 
   #hero .hero-img img {
     width: 70%;
+    height: auto;
   }
 }
 
 @media (max-width: 575px) {
   #hero .hero-img img {
     width: 80%;
+    height: auto;
   }
 }
 
